@@ -92,7 +92,12 @@
       }
       el.setAttribute(name, value.indexOf('{{') >= 0 ? interpolate(value, scope, vals) : value);
     });
-    if (tag === 'video' && el.hasAttribute('muted')) el.muted = true;
+    if (tag === 'video' && el.hasAttribute('muted')) {
+      el.muted = true;
+      /* Looping preview videos: load and play only while on screen. */
+      el.setAttribute('preload', 'none');
+      el.removeAttribute('autoplay');
+    }
     bindEvents(el);
     Array.prototype.forEach.call(node.childNodes, function (c) { build(c, scope, vals, el); });
     out.appendChild(el);
@@ -139,6 +144,26 @@
   DCLogic.prototype.forceUpdate = function () { if (this.__render) this.__render(); };
   window.DCLogic = DCLogic;
 
+  var io = null;
+  function watchVideos(root) {
+    if (!('IntersectionObserver' in window)) {
+      Array.prototype.forEach.call(root.querySelectorAll('video[muted]'), function (v) { v.play().catch(function () {}); });
+      return;
+    }
+    if (!io) {
+      io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var v = e.target;
+          if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+          else v.pause();
+        });
+      }, { rootMargin: '150px 0px' });
+    }
+    Array.prototype.forEach.call(root.querySelectorAll('video[muted]'), function (v) {
+      if (!v.__watched) { v.__watched = true; io.observe(v); }
+    });
+  }
+
   window.DCMount = function (Component, tpl, root) {
     var comp = new Component({});
     var queued = false;
@@ -147,6 +172,7 @@
       var holder = document.createElement('div');
       Array.prototype.forEach.call(tpl.content.childNodes, function (c) { build(c, {}, vals, holder); });
       patchChildren(root, holder);
+      watchVideos(root);
     }
     comp.__render = function () {
       if (queued) return;
