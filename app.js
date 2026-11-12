@@ -23,7 +23,7 @@ class Component extends DCLogic {
         h1b: 'Luigi’s Box.',
         lead: 'Prehľad vizuálnych inšpirácií, nápadov a poznámok na redizajn súčasného webu.',
         s1tag: 'Vizuálny smer',
-        s1title: 'Všeobecná inšpirácia: Bloomreach, Stripe, Shopify..',
+        s1title: 'Všeobecná inšpirácia: Bloomreach, Stripe, Shopify.',
         s1body: 'Tieto weby sú skvelou inšpiráciou ako prepojiť prezentáciu produktu s celkovým používateľským zážitkom. Namiesto generických fotografií stavajú na produktovom UI, kreatívnych vizuáloch a abstraktných prvkoch, ktoré dopĺňajú celkový vizuál. Páči sa mi tu jemné animácie, práca s farebnosťou a gradientami a celkový dôraz na zapamätateľný vizuálny zážitok.',
         s1intro: 'Čím sa môžeme inšpirovať:',
         bullets: [
@@ -198,7 +198,7 @@ class Component extends DCLogic {
         h1b: 'Luigi’s Box website.',
         lead: 'An overview of visual inspirations, ideas and notes for redesigning the current website.',
         s1tag: 'Visual direction',
-        s1title: 'General inspiration: Bloomreach, Stripe, Shopify..',
+        s1title: 'General inspiration: Bloomreach, Stripe, Shopify.',
         s1body: 'These websites are great inspiration for connecting the presentation of a product with the overall user experience. Instead of generic photos, they build on product UI, creative visuals and abstract elements that complement the overall look. I like the subtle animations, the work with color and gradients, and the overall emphasis on a memorable visual experience.',
         s1intro: 'What we can draw inspiration from:',
         bullets: [
